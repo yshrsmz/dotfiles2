@@ -29,5 +29,42 @@ if [ -n "$outdated" ]; then
 fi
 
 declare -a BREW_PACKAGES=(
-
+    "gcc"
+    "ansible"
+    "ios-sim"
+    "groovy"
+    "gradle"
+    "pandoc"
+    "imagemagick"
+    "node"
+    "readline"
+    "git"
+    "tig"
+    "zsh"
+    "z"
+    "tree"
+    "openssl"
+    "ruby-build"
+    "rbenv"
+    "tmux"
+    "reattach-to-user-namespace"
+    "go"
+    "docker"
+    "boot2docker"
+    "python"
+    "libgit2 --with-libssh2"
+    "automake"
+    "wget"
+    "peco/peco/peco"
+    "homebrew/binary/jad"
+    "homebrew/binary/dex2jar"
 )
+
+for package in "${BREW_PACKAGES[@]}"
+do
+    if brew list -1 | grep -q "^${basename $package}"; then
+        echo "Skip: brew install ${package}"
+    else
+        brew install $package
+    fi
+done
