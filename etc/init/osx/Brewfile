@@ -1,0 +1,33 @@
+#!/bin/bash
+
+trap 'echo Error: $0: stopped; exit 1' ERR
+set -u
+set -e
+
+if ! type brew >/dev/null 2>&1; then
+    echo 'Requirement: brew' 1>&2
+    exit 1
+fi
+
+echo 'updating brew...'
+
+brew update
+outdated=$(brew outdated)
+
+if [ -n "$outdated" ]; then
+    echo 'following package(s) will be upgraded.'
+    echo ''
+    echo "$outdated"
+    echo 'Are you sure?'
+    echo 'If you do not want to upgrade, Please type Ctrl-c now.'
+    echo ''
+
+    # wait Ctrl-c
+    read dummy
+
+    brew upgrade
+fi
+
+declare -a BREW_PACKAGES=(
+
+)

@@ -1,0 +1,9 @@
+.DS_Store
+*~
+
+/_vim/bundle/
+/_vim/.netrwhist
+Gemfile.lock
+launchd.conf
+vendor/
+.bundle
