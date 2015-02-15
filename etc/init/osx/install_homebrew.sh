@@ -8,13 +8,13 @@ set -e
 if [[ $OSTYPE != darwin* ]]; then
     exit 0
 fi
-if type brew > /dev/null 2>$1; then
+if type brew > /dev/null 2>&1; then
     exit 0
 fi
 
 if [[ -n ${DEBUG:-} ]]; then echo "$0" && exit 0; fi
 
-echo 'brew: command not found' 1>$2
+echo 'brew: command not found' 1>&2
 echo -n 'Install now? (y/N) '
 read
 if [[ "$REPLY" =~ ^[Yy]$ ]]; then
