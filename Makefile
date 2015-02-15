@@ -27,12 +27,22 @@ ifeq ($(shell uname), Darwin)
 	@$(foreach val, $(wildcard ./etc/init/osx/*.sh), bash $(val);)
 
 homebrew:
+	@echo 'Installing homebrew...'
+	@echo ''
 	@bash $(DOTFILES_DIR)/etc/init/osx/install_homebrew.sh
 
 brew: homebrew
+	@echo 'Installing homebrew formulae...'
 	@bash $(DOTFILES_DIR)/etc/init/osx/Brewfile
 
 cask: homebrew
 	@bash $(DOTFILES_DIR)/etc/init/osx/Caskfile
-
 endif
+
+install: update deploy init
+	@exec $$SHELL
+
+clean:
+	@echo 'Remove dot files in your home directory...'
+	@-$(foreach val, $(DOTFILES_FILES), rm -vrf $(HOME)/$(val);)
+	-rm -rf $(DOTFILES_DIR)
