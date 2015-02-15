@@ -1,6 +1,5 @@
 DOTFILES_DIR := $(PWD)
 SYMLINK_TARGETS := $(wildcard _*)
-DESTINATIONS = $(patsubst _%, .%, $(wildcard _*))
 
 targets:
 	@$(foreach file, $(SYMLINK_TARGETS), ls -dF $(file);)
@@ -22,7 +21,6 @@ deploy:
 
 init:
 	@$(foreach val, $(wildcard ./etc/init/*.sh), bash $(val);)
-
 ifeq ($(shell uname), Darwin)
 	@$(foreach val, $(wildcard ./etc/init/osx/*.sh), bash $(val);)
 
